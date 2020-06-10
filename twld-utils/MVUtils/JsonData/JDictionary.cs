@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JsonData
+namespace MVUtils.JsonData
 {
     /// <summary>
     /// Jsonの連想配列を表現するためのクラス。

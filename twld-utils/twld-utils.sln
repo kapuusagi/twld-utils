@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PEditor", "PEditor\PEditor.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVUtils", "MVUtils\MVUtils.csproj", "{7126D22B-200F-4D46-953E-F4F5BB0FEAE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVUtils-tool", "MVUtils-tool\MVUtils-tool.csproj", "{A11D94D4-155E-49B9-9709-EB0913C68E0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7126D22B-200F-4D46-953E-F4F5BB0FEAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7126D22B-200F-4D46-953E-F4F5BB0FEAE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7126D22B-200F-4D46-953E-F4F5BB0FEAE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A11D94D4-155E-49B9-9709-EB0913C68E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A11D94D4-155E-49B9-9709-EB0913C68E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A11D94D4-155E-49B9-9709-EB0913C68E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A11D94D4-155E-49B9-9709-EB0913C68E0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

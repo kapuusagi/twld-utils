@@ -7,7 +7,7 @@
     <ProjectGuid>{A11D94D4-155E-49B9-9709-EB0913C68E0D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>MVUtils_tool</RootNamespace>
-    <AssemblyName>MVUtils_tool</AssemblyName>
+    <AssemblyName>MVUtils-tool</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,11 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dumper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MVUtils\MVUtils.csproj">
+      <Project>{7126d22b-200f-4d46-953e-f4f5bb0feae5}</Project>
+      <Name>MVUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

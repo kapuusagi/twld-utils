@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JsonData
+namespace MVUtils.JsonData
 {
     /// <summary>
     /// インデント付きで出力するためのラッパークラス。
     /// </summary>
-    internal class IndentWriter
+    public class IndentWriter
     {
         private System.IO.TextWriter writer;
 

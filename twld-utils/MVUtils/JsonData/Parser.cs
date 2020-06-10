@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JsonData
+namespace MVUtils.JsonData
 {
     /// <summary>
     /// Json形式で書かれたデータのパーサー
@@ -55,8 +55,7 @@ namespace JsonData
                 }
                 else
                 {
-                    // 読み捨て。
-                    reader.Read();
+                    reader.Consume();
                 }
 
             }
@@ -71,7 +70,7 @@ namespace JsonData
         private static JDictionary ReadDictionary(LocalReader reader)
         {
             // 最初の1文字読み捨て。'{'
-            reader.Read();
+            reader.Consume();
 
             JDictionary dictionary = new JDictionary();
             string key = null;
