@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MVUtils;
 using MVUtils.JsonData;
 
 /// <summary>
@@ -27,20 +28,60 @@ namespace MVUtils_tool
         /// <summary>
         /// データをダンプする。
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">ファイルパス</param>
         private static void DumpDataProc(string path)
         {
             try
             {
-                DataReader reader = new DataReader();
-                object obj = reader.Read(path);
-                Dumper.Dump(obj, Console.Out);
+                string fileName = System.IO.Path.GetFileName(path);
+                if (fileName.Equals("Actors.json"))
+                {
+                    DumpActorsJson(path);
+                }
+                else if (path.EndsWith(".json"))
+                {
+                    DumpGenericJsonData(path);
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
             Console.ReadKey();
+        }
+
+        /// <summary>
+        /// アクターのデータファイルを解析してダンプする。
+        /// </summary>
+        /// <param name="path">ファイルパス</param>
+        private static void DumpActorsJson(string path)
+        {
+            List<DataActor> actors = DataActorListParser.Read(path);
+
+            Console.WriteLine("[");
+            foreach (DataActor actor in actors)
+            {
+                if (actor == null)
+                {
+                    Console.WriteLine("null,");
+                }
+                else
+                {
+                    Console.WriteLine(actor.ToString());
+                }
+            }
+            Console.WriteLine("]");
+        }
+
+        /// <summary>
+        /// 汎用Json記述データをダンプする。
+        /// </summary>
+        /// <param name="path">ファイルパス</param>
+        private static void DumpGenericJsonData(string path)
+        {
+            DataReader reader = new DataReader();
+            object obj = reader.Read(path);
+            Dumper.Dump(obj, Console.Out);
         }
 
 

@@ -12,7 +12,6 @@ namespace MVUtils.JsonData
     internal class LocalReader
     {
         private System.IO.StreamReader reader;
-        private bool isDebugEnable = false;
 
         /// <summary>
         /// 新しいLocalReaderオブジェクトを構築する。
@@ -21,7 +20,7 @@ namespace MVUtils.JsonData
         internal LocalReader(System.IO.Stream stream)
         {
             reader = new System.IO.StreamReader(stream);
-            isDebugEnable = false;
+            DebugEnable = false;
         }
 
         /// <summary>

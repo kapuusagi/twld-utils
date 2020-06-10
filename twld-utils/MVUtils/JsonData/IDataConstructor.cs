@@ -14,10 +14,10 @@ namespace MVUtils.JsonData
         /// <summary>
         /// 空のディクショナリデータを構築する。
         /// </summary>
-        /// <param name="perent">親オブジェクト</param>
+        /// <param name="parent">親オブジェクト</param>
         /// <param name="paramName">名前(無い場合にはnull)</param>
         /// <returns>空のディクショナリデータ</returns>
-        object CreateDictionary(object perent, string paramName);
+        object CreateDictionary(object parent, string paramName);
         /// <summary>
         /// dictionaryにkey,dataをセットする。
         /// </summary>

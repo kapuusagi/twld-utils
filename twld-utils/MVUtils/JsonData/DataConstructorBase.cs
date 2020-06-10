@@ -13,10 +13,10 @@ namespace MVUtils.JsonData
         /// <summary>
         /// 空のディクショナリデータを構築する。
         /// </summary>
-        /// <param name="perent">親オブジェクト</param>
+        /// <param name="parent">親オブジェクト</param>
         /// <param name="paramName">名前(無い場合にはnull)</param>
         /// <returns>空のディクショナリデータ</returns>
-        public object CreateDictionary(object perent, string paramName)
+        public virtual object CreateDictionary(object parent, string paramName)
         {
             return new Dictionary<string, object>();
         }
@@ -26,7 +26,7 @@ namespace MVUtils.JsonData
         /// <param name="dictionary">ディクショナリオブジェクト。CreateDictionaryで構築したやつ</param>
         /// <param name="key">キー</param>
         /// <param name="data">データオブジェクト</param>
-        public void SetDictionaryData(object dictionary, string key, object data)
+        public virtual void SetDictionaryData(object dictionary, string key, object data)
         {
             Dictionary<string, object> dictionaryObj = (Dictionary<string, object>)(dictionary);
             if (dictionaryObj.ContainsKey(key))
@@ -45,7 +45,7 @@ namespace MVUtils.JsonData
         /// <param name="parent">親オブジェクト</param>
         /// <param name="paramName">パラメータ名</param>
         /// <returns>空の配列データ</returns>
-        public object CreateArray(object parent, string paramName)
+        public virtual object CreateArray(object parent, string paramName)
         {
             return new List<object>();
         }
@@ -54,7 +54,7 @@ namespace MVUtils.JsonData
         /// </summary>
         /// <param name="array"行列></param>
         /// <param name="data">データ</param>
-        public void AddArrayData(object array, object data)
+        public virtual void AddArrayData(object array, object data)
         {
             List<object> arrayObj = (List<object>)(array);
             arrayObj.Add(data);
@@ -64,7 +64,7 @@ namespace MVUtils.JsonData
         /// </summary>
         /// <param name="valueStr">データ文字列</param>
         /// <returns>プリミティブデータ</returns>
-        public object CreatePrimitive(string valueStr)
+        public virtual object CreatePrimitive(string valueStr)
         {
             if (valueStr.Equals("null"))
             {

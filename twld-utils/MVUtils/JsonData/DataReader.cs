@@ -300,8 +300,35 @@ namespace MVUtils.JsonData
                 }
                 else if (c == '\\')
                 {
-                    sb.Append(c);
-                    sb.Append((char)(reader.Read()));
+                    // エスケープシーケンス
+                    // 一応次の文字次第で処理を変更する。
+                    char nextChar = reader.Peek();
+                    switch (nextChar)
+                    {
+                        case '\'': // \' シングルクォーテーション
+                            reader.Consume();
+                            sb.Append('\'');
+                            break;
+                        case '\"': // \" ダブルクォーテーション
+                            reader.Consume();
+                            sb.Append('\"');
+                            break;
+                        case 'r': // \r 改行
+                            reader.Consume();
+                            sb.Append('\r');
+                            break;
+                        case 'n': // \n 改行
+                            reader.Consume();
+                            sb.Append('\n');
+                            break;
+                        case 't': // \t タブ
+                            reader.Consume();
+                            sb.Append('\t');
+                            break;
+                        default:
+                            sb.Append(c);
+                            break;
+                    }
                 }
                 else
                 {
