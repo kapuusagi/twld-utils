@@ -6,7 +6,7 @@ using MVUtils.JsonData;
 namespace MVUtils
 {
     /// <summary>
-    /// アクター情報を格納するためのモデル。
+    /// ベーシックシステムのアクター情報を格納するためのモデル。
     /// </summary>
     public class DataActor
     {
@@ -14,20 +14,66 @@ namespace MVUtils
         {
 
         }
+        /// <summary>
+        /// アクターID。有効値は1以上
+        /// </summary>
         public int Id { get; set; } = 0;
+        /// <summary>
+        /// 先頭グラフィックファイル名
+        /// </summary>
         public string BattlerName { get; set; } = string.Empty;
+        /// <summary>
+        /// 歩行グラフィックファイル中のキャラクターインデックス
+        /// </summary>
         public int CharacterIndex { get; set; } = 0;
+        /// <summary>
+        /// 歩行グラフィックファイル名
+        /// </summary>
         public string CharacterName { get; set; } = string.Empty;
+        /// <summary>
+        /// クラスID
+        /// </summary>
         public int ClassId { get; set; } = 0;
+        /// <summary>
+        /// 装備リスト
+        /// </summary>
         public List<int> Equips { get; private set; } = new List<int>();
+        /// <summary>
+        /// 顔グラフィックファイル中のインデックス番号
+        /// </summary>
         public int FaceIndex { get; set; } = 0;
+        /// <summary>
+        /// 顔グラフィックファイル名
+        /// </summary>
         public string FaceName { get; set; } = string.Empty;
+        /// <summary>
+        /// アクター自身の特性一覧。
+        /// ベーシックシステムでは追加したり削除したりできない。
+        /// </summary>
         public List<Trait> Traits { get; private set; } = new List<Trait>();
+        /// <summary>
+        /// 初期レベル
+        /// </summary>
         public int InitialLevel { get; set; } = 1;
+        /// <summary>
+        /// 最大レベル
+        /// </summary>
         public int MaxLevel { get; set; } = 99;
+        /// <summary>
+        /// 名前
+        /// </summary>
         public string Name { get; set; } = string.Empty;
+        /// <summary>
+        /// 通り名
+        /// </summary>
         public string Nickname { get; set; } = string.Empty;
+        /// <summary>
+        /// ノートタグ
+        /// </summary>
         public string Note { get; set; } = string.Empty;
+        /// <summary>
+        /// プロフィールテキスト
+        /// </summary>
         public string Profile { get; set; } = string.Empty;
 
         /// <summary>

@@ -63,8 +63,9 @@ namespace MVUtils.JsonData
         /// プリミティブデータを作成する。
         /// </summary>
         /// <param name="valueStr">データ文字列</param>
+        /// <param name="isString">文字列データとして指定されている場合にtrue</param>
         /// <returns>プリミティブデータ</returns>
-        public virtual object CreatePrimitive(string valueStr)
+        public virtual object CreatePrimitive(string valueStr, bool isString)
         {
             if (valueStr.Equals("null"))
             {
@@ -74,11 +75,11 @@ namespace MVUtils.JsonData
             {
                 return string.Empty;
             }
-            else if (double.TryParse(valueStr, out double d))
+            else if (!isString && double.TryParse(valueStr, out double d))
             {
                 return d;
             }
-            else if (bool.TryParse(valueStr, out bool b))
+            else if (!isString && bool.TryParse(valueStr, out bool b))
             {
                 return b;
             }

@@ -28,20 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.buttonAdd = new System.Windows.Forms.Button();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonAddProfile = new System.Windows.Forms.Button();
+            this.buttonDeleteProfile = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -63,7 +62,6 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemOpen,
             this.menuItemSave,
-            this.menuItemSaveAs,
             this.toolStripSeparator1,
             this.menuItemExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -73,48 +71,31 @@
             // menuItemOpen
             // 
             this.menuItemOpen.Name = "menuItemOpen";
-            this.menuItemOpen.Size = new System.Drawing.Size(180, 22);
+            this.menuItemOpen.Size = new System.Drawing.Size(103, 22);
             this.menuItemOpen.Text = "Open";
             this.menuItemOpen.Click += new System.EventHandler(this.OnMenuItemOpenClick);
             // 
             // menuItemSave
             // 
             this.menuItemSave.Name = "menuItemSave";
-            this.menuItemSave.Size = new System.Drawing.Size(180, 22);
+            this.menuItemSave.Size = new System.Drawing.Size(103, 22);
             this.menuItemSave.Text = "Save";
             this.menuItemSave.Click += new System.EventHandler(this.OnMenuItemSaveClick);
-            // 
-            // menuItemSaveAs
-            // 
-            this.menuItemSaveAs.Name = "menuItemSaveAs";
-            this.menuItemSaveAs.Size = new System.Drawing.Size(180, 22);
-            this.menuItemSaveAs.Text = "Save As";
-            this.menuItemSaveAs.Click += new System.EventHandler(this.OnMenuItemSaveAsClick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(180, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(103, 22);
             this.menuItemExit.Text = "Exit";
             this.menuItemExit.Click += new System.EventHandler(this.OnMenuItemExitClick);
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            this.openFileDialog.Filter = "JsonFile(*.json)|*.json";
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.Filter = "JsonFile(*.json)|*.json";
-            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Controls.Add(this.dataGridView);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 24);
@@ -125,55 +106,79 @@
             // 
             // dataGridView
             // 
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridView.ColumnHeadersVisible = false;
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.Location = new System.Drawing.Point(4, 4);
+            this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
+            this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowTemplate.Height = 21;
-            this.dataGridView.Size = new System.Drawing.Size(181, 297);
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.Size = new System.Drawing.Size(181, 418);
             this.dataGridView.TabIndex = 0;
+            this.dataGridView.SelectionChanged += new System.EventHandler(this.OnDataGridViewSelectionChanged);
             // 
-            // buttonAdd
+            // tabControl
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(3, 3);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
-            this.buttonAdd.TabIndex = 1;
-            this.buttonAdd.Text = "Add";
-            this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.OnButtonAddClick);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(189, 53);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(611, 397);
+            this.tabControl.TabIndex = 2;
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.buttonAdd);
-            this.flowLayoutPanel1.Controls.Add(this.buttonDelete);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 301);
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Controls.Add(this.buttonAddProfile);
+            this.flowLayoutPanel1.Controls.Add(this.buttonDeleteProfile);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(189, 24);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(181, 121);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(611, 29);
+            this.flowLayoutPanel1.TabIndex = 3;
             // 
-            // buttonDelete
+            // buttonAddProfile
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(3, 32);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
-            this.buttonDelete.TabIndex = 2;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.OnButtonDeleteClick);
+            this.buttonAddProfile.Location = new System.Drawing.Point(3, 3);
+            this.buttonAddProfile.Name = "buttonAddProfile";
+            this.buttonAddProfile.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddProfile.TabIndex = 0;
+            this.buttonAddProfile.Text = "Add";
+            this.buttonAddProfile.UseVisualStyleBackColor = true;
+            this.buttonAddProfile.Click += new System.EventHandler(this.OnButtonAddProfileClick);
+            // 
+            // buttonDeleteProfile
+            // 
+            this.buttonDeleteProfile.Location = new System.Drawing.Point(84, 3);
+            this.buttonDeleteProfile.Name = "buttonDeleteProfile";
+            this.buttonDeleteProfile.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteProfile.TabIndex = 1;
+            this.buttonDeleteProfile.Text = "Delete";
+            this.buttonDeleteProfile.UseVisualStyleBackColor = true;
+            this.buttonDeleteProfile.Click += new System.EventHandler(this.OnButtonDeleteProfileClick);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.Text = "PEditor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
+            this.Shown += new System.EventHandler(this.OnFormShown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -190,16 +195,14 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemOpen;
         private System.Windows.Forms.ToolStripMenuItem menuItemSave;
-        private System.Windows.Forms.ToolStripMenuItem menuItemSaveAs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuItemExit;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button buttonAddProfile;
+        private System.Windows.Forms.Button buttonDeleteProfile;
     }
 }
 

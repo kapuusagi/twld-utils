@@ -204,24 +204,29 @@ namespace MVUtils.JsonData
             return " \t\r\n".IndexOf(c) >= 0;
         }
 
+        /// <summary>
+        /// プリミティブデータを読み出す。
+        /// </summary>
+        /// <param name="reader">読み込み元</param>
+        /// <returns>プリミティブデータ</returns>
         private object ReadPrimitive(LocalReader reader)
         {
             char firstChar = (char)(reader.Peek());
             if ((firstChar == '\"') || (firstChar == '\''))
             {
                 string strValue = ReadQuoatedString(reader, firstChar);
-                return DataConstructor.CreatePrimitive(strValue);
+                return DataConstructor.CreatePrimitive(strValue, true);
             }
             else if (char.IsDigit(firstChar) || (firstChar == '-') || (firstChar == '+'))
             {
                 string numValue = ReadNumberString(reader);
-                return DataConstructor.CreatePrimitive(numValue);
+                return DataConstructor.CreatePrimitive(numValue, false);
             }
             else
             {
                 // ここに来ること基本的にないよね。変数指定のときだけじゃ。
                 string s = ReadString(reader);
-                return DataConstructor.CreatePrimitive(s);
+                return DataConstructor.CreatePrimitive(s, false);
             }
         }
 

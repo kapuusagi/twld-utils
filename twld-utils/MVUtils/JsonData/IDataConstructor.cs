@@ -43,7 +43,8 @@ namespace MVUtils.JsonData
         /// プリミティブデータを作成する。
         /// </summary>
         /// <param name="valueStr">データ文字列</param>
+        /// <param name="isString">文字列データとして指定されている場合にtrue</param>
         /// <returns>プリミティブデータ</returns>
-        object CreatePrimitive(string valueStr);
+        object CreatePrimitive(string valueStr, bool isString);
     }
 }

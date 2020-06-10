@@ -46,20 +46,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActorProfileData.cs" />
+    <Compile Include="DataActorProfile.cs" />
+    <Compile Include="DataActorProfileWriter.cs" />
+    <Compile Include="FolderSelectDialog.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Json\MyJsonReader.cs" />
-    <Compile Include="ProfileData.cs" />
-    <Compile Include="ProfileReader.cs" />
+    <Compile Include="Profile.cs" />
+    <Compile Include="DataActorProfileReader.cs" />
+    <Compile Include="ProfileEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProfileEditorControl.Designer.cs">
+      <DependentUpon>ProfileEditorControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileEditorControl.resx">
+      <DependentUpon>ProfileEditorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -83,6 +93,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MVUtils\MVUtils.csproj">
+      <Project>{7126d22b-200f-4d46-953e-f4f5bb0feae5}</Project>
+      <Name>MVUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

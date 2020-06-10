@@ -63,6 +63,10 @@ namespace MVUtils
                     {
                         dataActor.SetValue(key, data);
                     }
+                    else
+                    {
+                        throw new Exception("Parse error");
+                    }
                 }
                 catch (Exception e)
                 {
@@ -115,6 +119,10 @@ namespace MVUtils
                 else if (array is List<Trait> traits)
                 {
                     traits.Add((Trait)(data));
+                }
+                else
+                {
+                    throw new Exception("Parse error");
                 }
             }
 
