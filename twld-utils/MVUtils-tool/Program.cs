@@ -36,15 +36,19 @@ namespace MVUtils_tool
                 string fileName = System.IO.Path.GetFileName(path);
                 if (fileName.Equals("Actors.json"))
                 {
-                    DumpActorsJson(path);
+                    DumpItems(DataActorListParser.Read(path));
                 }
                 else if (fileName.Equals("Items.json"))
                 {
-                    DumpItemsJson(path);
+                    DumpItems(DataItemListParser.Read(path));
                 }
                 else if (fileName.Equals("Weapons.json"))
                 {
-                    DumpWeaponsJson(path);
+                    DumpItems(DataWeaponListParser.Read(path));
+                }
+                else if (fileName.Equals("Armors.json"))
+                {
+                    DumpItems(DataArmorListParser.Read(path));
                 }
                 else if (path.EndsWith(".json"))
                 {
@@ -59,37 +63,15 @@ namespace MVUtils_tool
         }
 
         /// <summary>
-        /// アクターのデータファイルを解析してダンプする。
+        /// 項目をコンソール出力にダンプする。
         /// </summary>
-        /// <param name="path">ファイルパス</param>
-        private static void DumpActorsJson(string path)
+        /// <param name="items">アイテムリスト</param>
+        private static void DumpItems(System.Collections.IList items)
         {
-            List<DataActor> actors = DataActorListParser.Read(path);
-
-            Console.WriteLine("[");
-            for (int i = 0; i < actors.Count; i++) 
-            {
-                DataActor actor = actors[i];
-                if (actor == null)
-                {
-                    Console.Write("null");
-                }
-                else
-                {
-                    Console.Write(actor.ToString());
-                }
-                Console.WriteLine(((i + 1) < actors.Count) ? "," : "");
-            }
-            Console.WriteLine("]");
-        }
-
-        private static void DumpItemsJson(string path)
-        {
-            List<DataItem> items = DataItemListParser.Read(path);
             Console.WriteLine("[");
             for (int i = 0; i < items.Count; i++)
             {
-                DataItem item = items[i];
+                var item = items[i];
                 if (item == null)
                 {
                     Console.Write("null");
@@ -103,25 +85,6 @@ namespace MVUtils_tool
             Console.WriteLine("]");
         }
 
-        private static void DumpWeaponsJson(string path)
-        {
-            List<DataWeapon> weapons = DataWeaponListParser.Read(path);
-            Console.WriteLine("[");
-            for (int i = 0; i < weapons.Count; i++)
-            {
-                DataWeapon weapon = weapons[i];
-                if (weapon == null)
-                {
-                    Console.Write("null");
-                }
-                else
-                {
-                    Console.Write(weapon.ToString());
-                }
-                Console.WriteLine(((i + 1) < weapons.Count) ? "," : "");
-            }
-            Console.WriteLine("]");
-        }
 
         /// <summary>
         /// 汎用Json記述データをダンプする。
