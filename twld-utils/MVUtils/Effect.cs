@@ -4,11 +4,26 @@ using System.Text;
 
 namespace MVUtils
 {
+    /// <summary>
+    /// エフェクトを表すモデル。
+    /// </summary>
     public class Effect
     {
+        /// <summary>
+        /// エフェクトID
+        /// </summary>
         public int Code { get; set; } = 0;
+        /// <summary>
+        /// データID
+        /// </summary>
         public int DataId { get; set; } = 0;
+        /// <summary>
+        /// 値1
+        /// </summary>
         public double Value1 { get; set; } = 0;
+        /// <summary>
+        /// 値2
+        /// </summary>
         public double Value2 { get; set; } = 0;
 
         /// <summary>

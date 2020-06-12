@@ -72,16 +72,19 @@ namespace SEditor
             {
                 DataType = typeof(int),
                 ColumnName = "Min",
+                AllowDBNull = false
             });
             dt.Columns.Add(new DataColumn()
             {
                 DataType = typeof(int),
-                ColumnName = "Max"
+                ColumnName = "Max",
+                AllowDBNull = false,
             });
             dt.Columns.Add(new DataColumn()
             {
                 DataType = typeof(string),
-                ColumnName = "Condition"
+                ColumnName = "Condition",
+                AllowDBNull = true
             });
             dataGridViewItems.DataSource = dt;
 
@@ -611,13 +614,27 @@ namespace SEditor
                 switch (e.ColumnIndex)
                 {
                     case 1:
-                        entry.MinCount = (int)(row[1]);
+                        if (DBNull.Value.Equals(row[1]))
+                        {
+                            row[1] = entry.MinCount;
+                        }
+                        else
+                        {
+                            entry.MinCount = (int)(row[1]);
+                        }
                         break;
                     case 2:
-                        entry.MaxCount = (int)(row[2]);
+                        if (DBNull.Value.Equals(row[2]))
+                        {
+                            row[2] = entry.MaxCount;
+                        }
+                        else
+                        {
+                            entry.MaxCount = (int)(row[2]);
+                        }
                         break;
                     case 3:
-                        entry.Condition = (string)(row[3]);
+                        entry.Condition = row.Field<string>(3) ?? string.Empty;
                         break;
                 }
             }

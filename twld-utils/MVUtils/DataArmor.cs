@@ -4,19 +4,57 @@ using System.Text;
 
 namespace MVUtils
 {
+    /// <summary>
+    /// Armorデータを扱うためのモデル。
+    /// </summary>
     public class DataArmor : IItem
     {
+        /// <summary>
+        /// ID番号
+        /// </summary>
         public int Id { get; set; } = 0;
+        /// <summary>
+        /// 防具タイプID
+        /// </summary>
         public int ArmorTypeId { get; set; } = 0;
+        /// <summary>
+        /// 説明
+        /// </summary>
         public string Description { get; set; } = string.Empty;
+        /// <summary>
+        /// 装備タイプID
+        /// </summary>
         public int EquipTypeId { get; set; } = 0;
+        /// <summary>
+        /// 特性
+        /// </summary>
         public List<Trait> Traits { get; private set; } = new List<Trait>();
+        /// <summary>
+        /// アイコンインデックス
+        /// </summary>
         public int IconIndex { get; set; } = 0;
+        /// <summary>
+        /// 防具名
+        /// </summary>
         public string Name { get; set; } = string.Empty;
+        /// <summary>
+        /// ノート
+        /// </summary>
         public string Note { get; set; } = string.Empty;
+        /// <summary>
+        /// 基本パラメータ加算値
+        /// </summary>
         public int[] Params { get; private set; } = new int[8];
+        /// <summary>
+        /// 価格
+        /// </summary>
         public int Price { get; set; } = 0;
 
+        /// <summary>
+        /// 値をセットする。
+        /// </summary>
+        /// <param name="paramName">パラメータ名</param>
+        /// <param name="value">値</param>
         public void SetValue(string paramName, object value)
         {
             switch (paramName)
@@ -64,7 +102,7 @@ namespace MVUtils
         /// <summary>
         /// このオブジェクトの文字列表現を得る。
         /// </summary>
-        /// <returns></returns>
+        /// <returns>文字列</returns>
         public override string ToString()
         {
             JsonData.JObjectBuilder job = new JsonData.JObjectBuilder();

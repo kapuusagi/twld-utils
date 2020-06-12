@@ -9,6 +9,9 @@ namespace MVUtils
     /// </summary>
     public interface IItem : INamedObject
     {
+        /// <summary>
+        /// 説明
+        /// </summary>
         string Description { get; }
     }
 }
