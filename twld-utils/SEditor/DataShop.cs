@@ -27,5 +27,44 @@ namespace SEditor
         /// 入荷品リストと条件
         /// </summary>
         public List<ItemEntry> ItemList { get; private set; } = new List<ItemEntry>();
+
+        /// <summary>
+        /// フィールドを設定する。
+        /// </summary>
+        /// <param name="paramName">パラメータ名</param>
+        /// <param name="value">値</param>
+        public void SetValue(string paramName, object value)
+        {
+            switch (paramName)
+            {
+                case "id":
+                    Id = (int)((double)(value));
+                    break;
+                case "name":
+                    Name = (string)(value);
+                    break;
+                case "level":
+                    Level = (int)((double)(value));
+                    break;
+                case "itemList":
+                    ItemList.Clear();
+                    ItemList.AddRange((List<ItemEntry>)(value));
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// このオブジェクトの文字列表現を得る。
+        /// </summary>
+        /// <returns>文字列</returns>
+        public override string ToString()
+        {
+            MVUtils.JsonData.JObjectBuilder job = new MVUtils.JsonData.JObjectBuilder();
+            job.Append("id", Id);
+            job.Append("name", Name);
+            job.Append("level", Level);
+            job.Append("itemList", ItemList);
+            return job.ToString();
+        }
     }
 }

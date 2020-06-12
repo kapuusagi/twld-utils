@@ -21,10 +21,6 @@ namespace SEditor
         /// </summary>
         public int Id { get; set; } = 0;
         /// <summary>
-        /// 名前
-        /// </summary>
-        public string Name { get; set; } = "";
-        /// <summary>
         /// 種類
         /// </summary>
         public int Kind { get; set; } = 0;
@@ -36,5 +32,47 @@ namespace SEditor
         /// 最小入荷数
         /// </summary>
         public int MinCount { get; set; } = 0;
+
+        /// <summary>
+        /// 値を設定する。
+        /// </summary>
+        /// <param name="paramName">パラメータ名</param>
+        /// <param name="value">値</param>
+        public void SetValue(string paramName, object value)
+        {
+            switch (paramName)
+            {
+                case "id":
+                    Id = (int)((double)(value));
+                    break;
+                case "kind":
+                    Kind = (int)((double)(value));
+                    break;
+                case "maxCount":
+                    MaxCount = (int)((double)(value));
+                    break;
+                case "minCount":
+                    MinCount = (int)((double)(value));
+                    break;
+                case "condition":
+                    Condition = (string)(value);
+                    break;
+            }
+        }
+        /// <summary>
+        /// このオブジェクトの文字列表現を得る。
+        /// </summary>
+        /// <returns>文字列</returns>
+        public override string ToString()
+        {
+            MVUtils.JsonData.JObjectBuilder job = new MVUtils.JsonData.JObjectBuilder();
+            job.Append("id", Id);
+            job.Append("kind", Kind);
+            job.Append("maxCount", MaxCount);
+            job.Append("minCount", MinCount);
+            job.Append("condition", Condition);
+
+            return job.ToString();
+        }
     }
 }

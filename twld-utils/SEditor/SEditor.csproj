@@ -47,12 +47,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataShop.cs" />
+    <Compile Include="DataShopListReader.cs" />
+    <Compile Include="DataShopListWriter.cs" />
     <Compile Include="FolderSelectDialog.cs" />
+    <Compile Include="FormNumberInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNumberInput.Designer.cs">
+      <DependentUpon>FormNumberInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSelectableItemList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelectableItemList.Designer.cs">
+      <DependentUpon>FormSelectableItemList.cs</DependentUpon>
     </Compile>
     <Compile Include="ItemEntry.cs" />
     <Compile Include="ItemEntryControl.cs">
@@ -63,8 +77,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormNumberInput.resx">
+      <DependentUpon>FormNumberInput.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelectableItemList.resx">
+      <DependentUpon>FormSelectableItemList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItemEntryControl.resx">
       <DependentUpon>ItemEntryControl.cs</DependentUpon>
