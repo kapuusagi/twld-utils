@@ -1,34 +1,30 @@
 ﻿using MVUtils.JsonData;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace MVUtils
 {
     /// <summary>
-    /// アイテム一覧のパーサー
+    /// Weaponリストをパースするためのクラス
     /// </summary>
-    public static class DataItemListParser
+    public static class DataWeaponListParser
     {
         /// <summary>
-        /// pathで指定されたファイルから読み出す。
+        /// Weapons.jsonを読み出してDataWeapon配列を取得する。
         /// </summary>
         /// <param name="path">ファイルパス</param>
-        /// <returns>DataItemのリスト</returns>
-        public static List<DataItem> Read(string path)
+        /// <returns></returns>
+        public static List<DataWeapon> Read(string path)
         {
             DataReader reader = new DataReader()
             {
-                DataConstructor = new DataItemConstructor()
+                DataConstructor = new DataWeaponConstructor()
             };
-            return (List<DataItem>)(reader.Read(path));
+            return (List<DataWeapon>)(reader.Read(path));
         }
 
-        /// <summary>
-        /// アイテムデータを読み出して構築するクラス
-        /// </summary>
-        private class DataItemConstructor : DataConstructorBase
+        private class DataWeaponConstructor : DataConstructorBase
         {
             /// <summary>
             /// 空のディクショナリデータを構築する。
@@ -38,20 +34,13 @@ namespace MVUtils
             /// <returns>空のディクショナリデータ</returns>
             public override object CreateDictionary(object parent, string paramName)
             {
-                if (parent is List<DataItem>)
+                if (parent is List<DataWeapon>)
                 {
-                    return new DataItem();
+                    return new DataWeapon();
                 }
-                if (parent is List<Effect>)
+                if (parent is List<Trait>)
                 {
-                    return new Effect();
-                }
-                else if (parent is DataItem)
-                {
-                    if (paramName.Equals("damage"))
-                    {
-                        return new DamageEffect();
-                    }
+                    return new Trait();
                 }
                 // ここに来ることはないはず。
                 throw new Exception("Parse error.");
@@ -66,17 +55,13 @@ namespace MVUtils
             {
                 try
                 {
-                    if (dictionary is DataItem item)
+                    if (dictionary is DataWeapon weapon)
                     {
-                        item.SetValue(key, data);
+                        weapon.SetValue(key, data);
                     }
-                    else if (dictionary is DamageEffect damage)
+                    else if (dictionary is Trait trait)
                     {
-                        damage.SetValue(key, data);
-                    }
-                    else if (dictionary is Effect effect)
-                    {
-                        effect.SetValue(key, data);
+                        trait.SetValue(key, data);
                     }
                     else
                     {
@@ -85,7 +70,7 @@ namespace MVUtils
                 }
                 catch (Exception e)
                 {
-                    throw new Exception($"{nameof(DataItemListParser)}: {dictionary.GetType().Name}'s {key} = {data} :.{e.Message}");
+                    throw new Exception($"{nameof(DataWeaponListParser)}: {dictionary.GetType().Name}'s {key} = {data} :.{e.Message}");
                 }
             }
 
@@ -99,13 +84,17 @@ namespace MVUtils
             {
                 if (parent == null)
                 {
-                    return new List<DataItem>();
+                    return new List<DataWeapon>();
                 }
-                else if (parent is DataItem)
+                else if (parent is DataWeapon)
                 {
-                    if (paramName.Equals("effects"))
+                    if (paramName.Equals("traits"))
                     {
-                        return new List<Effect>();
+                        return new List<Trait>();
+                    }
+                    else if (paramName.Equals("params"))
+                    {
+                        return new List<int>();
                     }
                 }
 
@@ -119,13 +108,17 @@ namespace MVUtils
             /// <param name="data">データ</param>
             public override void AddArrayData(object array, object data)
             {
-                if (array is List<DataItem> itemList)
+                if (array is List<DataWeapon> weaponList)
                 {
-                    itemList.Add((DataItem)(data));
+                    weaponList.Add((DataWeapon)(data));
                 }
-                else if (array is List<Effect> effects)
+                else if (array is List<Trait> traits)
                 {
-                    effects.Add((Effect)(data));
+                    traits.Add((Trait)(data));
+                }
+                else if (array is List<int> paramList)
+                {
+                    paramList.Add((int)((double)(data)));
                 }
                 else
                 {
@@ -133,6 +126,6 @@ namespace MVUtils
                 }
             }
         }
-
     }
+
 }

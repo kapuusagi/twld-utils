@@ -42,6 +42,10 @@ namespace MVUtils_tool
                 {
                     DumpItemsJson(path);
                 }
+                else if (fileName.Equals("Weapons.json"))
+                {
+                    DumpWeaponsJson(path);
+                }
                 else if (path.EndsWith(".json"))
                 {
                     DumpGenericJsonData(path);
@@ -95,6 +99,26 @@ namespace MVUtils_tool
                     Console.Write(item.ToString());
                 }
                 Console.WriteLine(((i + 1) < items.Count) ? "," : "");
+            }
+            Console.WriteLine("]");
+        }
+
+        private static void DumpWeaponsJson(string path)
+        {
+            List<DataWeapon> weapons = DataWeaponListParser.Read(path);
+            Console.WriteLine("[");
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                DataWeapon weapon = weapons[i];
+                if (weapon == null)
+                {
+                    Console.Write("null");
+                }
+                else
+                {
+                    Console.Write(weapon.ToString());
+                }
+                Console.WriteLine(((i + 1) < weapons.Count) ? "," : "");
             }
             Console.WriteLine("]");
         }

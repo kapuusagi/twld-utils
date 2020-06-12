@@ -4,25 +4,79 @@ using System.Text;
 
 namespace MVUtils
 {
-    public class DataItem 
+    public class DataItem : IItem
     {
+        /// <summary>
+        /// ID番号
+        /// </summary>
         public int Id { get; set; } = 0;
+        /// <summary>
+        /// アニメーションID
+        /// </summary>
         public int AnimationId { get; set; } = 0;
+        /// <summary>
+        /// 消耗品かどうか
+        /// </summary>
         public Boolean Consumable { get; set; } = false;
+        /// <summary>
+        /// ダメージ効果
+        /// </summary>
         public DamageEffect Damage { get; private set; } = new DamageEffect();
+        /// <summary>
+        /// 説明
+        /// </summary>
         public string Description { get; set; } = string.Empty;
+        /// <summary>
+        /// 効果
+        /// </summary>
         public List<Effect> Effects { get; private set; } = new List<Effect>();
+        /// <summary>
+        /// 命中タイプ
+        /// </summary>
         public int HitType { get; set; } = 0;
+        /// <summary>
+        /// アイコンインデックス
+        /// </summary>
         public int IconIndex { get; set; } = 0;
+        /// <summary>
+        /// アイテムタイプ番号
+        /// </summary>
         public int ItemTypeId { get; set; } = 0;
+        /// <summary>
+        /// 名前
+        /// </summary>
         public string Name { get; set; } = string.Empty;
+        /// <summary>
+        /// ノートタグ
+        /// </summary>
         public string Note { get; set; } = string.Empty;
+        /// <summary>
+        /// 使用機会
+        /// </summary>
         public int Occasion { get; set; } = 0;
+        /// <summary>
+        /// /価格
+        /// </summary>
         public int Price { get; set; } = 0;
+        /// <summary>
+        /// 
+        /// </summary>
         public int Repeats { get; set; } = 0;
+        /// <summary>
+        /// 
+        /// </summary>
         public int Scope { get; set; } = 0;
+        /// <summary>
+        /// 
+        /// </summary>
         public int Speed { get; set; } = 0;
+        /// <summary>
+        /// 
+        /// </summary>
         public int SuccessRate { get; set; } = 0;
+        /// <summary>
+        /// 
+        /// </summary>
         public int TpGain { get; set; } = 0;
 
         /// <summary>
