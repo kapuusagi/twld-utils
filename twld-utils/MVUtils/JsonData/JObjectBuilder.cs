@@ -55,9 +55,17 @@ namespace MVUtils.JsonData
             {
                 Append(paramName, b);
             }
-            else
+            else if (obj is string str)
             {
-                Append(paramName, obj.ToString());
+                Append(paramName, str);
+            }
+            else 
+            {
+                if (sb.Length > 0)
+                {
+                    sb.Append(',');
+                }
+                sb.Append('\"').Append(paramName).Append("\":").Append(obj.ToString());
             }
         }
 

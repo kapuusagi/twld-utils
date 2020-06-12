@@ -8,7 +8,7 @@ namespace MVUtils
     /// <summary>
     /// ベーシックシステムのアクター情報を格納するためのモデル。
     /// </summary>
-    public class DataActor
+    public class DataActor : INamedObject
     {
         public DataActor()
         {

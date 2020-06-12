@@ -38,6 +38,10 @@ namespace MVUtils_tool
                 {
                     DumpActorsJson(path);
                 }
+                else if (fileName.Equals("Items.json"))
+                {
+                    DumpItemsJson(path);
+                }
                 else if (path.EndsWith(".json"))
                 {
                     DumpGenericJsonData(path);
@@ -59,16 +63,38 @@ namespace MVUtils_tool
             List<DataActor> actors = DataActorListParser.Read(path);
 
             Console.WriteLine("[");
-            foreach (DataActor actor in actors)
+            for (int i = 0; i < actors.Count; i++) 
             {
+                DataActor actor = actors[i];
                 if (actor == null)
                 {
-                    Console.WriteLine("null,");
+                    Console.Write("null");
                 }
                 else
                 {
-                    Console.WriteLine(actor.ToString());
+                    Console.Write(actor.ToString());
                 }
+                Console.WriteLine(((i + 1) < actors.Count) ? "," : "");
+            }
+            Console.WriteLine("]");
+        }
+
+        private static void DumpItemsJson(string path)
+        {
+            List<DataItem> items = DataItemListParser.Read(path);
+            Console.WriteLine("[");
+            for (int i = 0; i < items.Count; i++)
+            {
+                DataItem item = items[i];
+                if (item == null)
+                {
+                    Console.Write("null");
+                }
+                else
+                {
+                    Console.Write(item.ToString());
+                }
+                Console.WriteLine(((i + 1) < items.Count) ? "," : "");
             }
             Console.WriteLine("]");
         }
