@@ -384,6 +384,8 @@ namespace SEditor
             {
                 textBoxShopName.Text = string.Empty;
                 numericUpDownShopLevel.Value = 1;
+                numericUpDownBuyingPriceRate.Value = 100;
+                numericUpDownSellingPriceRate.Value = 50;
                 ((DataTable)(dataGridViewShops.DataSource)).Rows.Clear();
             }
             else
@@ -391,10 +393,17 @@ namespace SEditor
                 textBoxShopName.Text = shop.Name;
                 int level = shop.Level;
                 numericUpDownShopLevel.Value = Math.Max(1, Math.Min(99, level));
+
+                int buyingPriceRate = (int)(shop.BuyingPriceRate * 100);
+                numericUpDownBuyingPriceRate.Value = Math.Max(1, Math.Min(10000, buyingPriceRate));
+                int sellingPriceRate = (int)(shop.SellingPriceRate * 100);
+                numericUpDownSellingPriceRate.Value = Math.Max(1, Math.Min(10000, sellingPriceRate));
                 UpdateDataGridViewItems();
             }
             textBoxShopName.Enabled = (shop != null);
             numericUpDownShopLevel.Enabled = (shop != null);
+            numericUpDownBuyingPriceRate.Enabled = (shop != null);
+            numericUpDownSellingPriceRate.Enabled = (shop != null);
             dataGridViewShops.Enabled = (shop != null);
             buttonAddItem.Enabled = (shop != null);
         }
@@ -642,6 +651,30 @@ namespace SEditor
             {
                 MessageBox.Show(this, ex.Message, "Error");
             }
+        }
+
+        /// <summary>
+        /// 販売レートが変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
+        private void OnNumericUpDownPriceRateChanged(object sender, EventArgs e)
+        {
+            DataShop shop = GetSelectedShop();
+            if (shop == null)
+            {
+                return;
+            }
+            double rate = (int)(((NumericUpDown)(sender)).Value) * 0.01;
+            if (sender == numericUpDownBuyingPriceRate)
+            {
+                shop.BuyingPriceRate = rate;
+            }
+            else if (sender == numericUpDownSellingPriceRate)
+            {
+                shop.SellingPriceRate = rate;
+            }
+
         }
     }
 }

@@ -24,6 +24,15 @@ namespace SEditor
         /// </summary>
         public int Level { get; set; } = 1;
         /// <summary>
+        /// 購入価格レート
+        /// </summary>
+        public double BuyingPriceRate { get; set; } = 1.0;
+        /// <summary>
+        /// 販売価格レート
+        /// </summary>
+        public double SellingPriceRate { get; set; } = 0.5;
+
+        /// <summary>
         /// 入荷品リストと条件
         /// </summary>
         public List<ItemEntry> ItemList { get; private set; } = new List<ItemEntry>();
@@ -50,6 +59,13 @@ namespace SEditor
                     ItemList.Clear();
                     ItemList.AddRange((List<ItemEntry>)(value));
                     break;
+                case "buyingPriceRate":
+                    BuyingPriceRate = (double)(value);
+                    break;
+                case "sellingPriceRate":
+                    SellingPriceRate = (double)(value);
+                    break;
+
             }
         }
 
@@ -64,6 +80,8 @@ namespace SEditor
             job.Append("name", Name);
             job.Append("level", Level);
             job.Append("itemList", ItemList);
+            job.Append("buyingPriceRate", BuyingPriceRate);
+            job.Append("sellingPriceRate", SellingPriceRate);
             return job.ToString();
         }
     }

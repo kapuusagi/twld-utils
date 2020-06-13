@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +49,10 @@
             this.dataGridViewItems = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAddItem = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numericUpDownBuyingPriceRate = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownSellingPriceRate = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShops)).BeginInit();
@@ -59,6 +63,8 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBuyingPriceRate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSellingPriceRate)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -86,7 +92,7 @@
             // 
             this.menuItemOpen.Name = "menuItemOpen";
             this.menuItemOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuItemOpen.Size = new System.Drawing.Size(180, 22);
+            this.menuItemOpen.Size = new System.Drawing.Size(145, 22);
             this.menuItemOpen.Text = "Open";
             this.menuItemOpen.Click += new System.EventHandler(this.OnMenuItemOpenClick);
             // 
@@ -94,19 +100,19 @@
             // 
             this.menuItemSave.Name = "menuItemSave";
             this.menuItemSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuItemSave.Size = new System.Drawing.Size(180, 22);
+            this.menuItemSave.Size = new System.Drawing.Size(145, 22);
             this.menuItemSave.Text = "Save";
             this.menuItemSave.Click += new System.EventHandler(this.OnMenuItemSaveClick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(103, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(145, 22);
             this.menuItemExit.Text = "Exit";
             this.menuItemExit.Click += new System.EventHandler(this.OnMenuItemExitClick);
             // 
@@ -127,8 +133,8 @@
             this.dataGridViewShops.AllowUserToDeleteRows = false;
             this.dataGridViewShops.AllowUserToResizeColumns = false;
             this.dataGridViewShops.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dataGridViewShops.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dataGridViewShops.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewShops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewShops.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewShops.Location = new System.Drawing.Point(4, 4);
@@ -169,7 +175,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(200, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(734, 79);
+            this.panel2.Size = new System.Drawing.Size(734, 100);
             this.panel2.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -181,20 +187,26 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBoxShopName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownShopLevel, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.numericUpDownBuyingPriceRate, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.numericUpDownSellingPriceRate, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(734, 79);
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(734, 100);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 53);
+            this.label2.Location = new System.Drawing.Point(3, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 12);
             this.label2.TabIndex = 1;
@@ -204,7 +216,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 13);
+            this.label3.Location = new System.Drawing.Point(3, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 12);
             this.label3.TabIndex = 2;
@@ -213,7 +225,7 @@
             // textBoxShopName
             // 
             this.textBoxShopName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxShopName.Location = new System.Drawing.Point(66, 10);
+            this.textBoxShopName.Location = new System.Drawing.Point(121, 3);
             this.textBoxShopName.Name = "textBoxShopName";
             this.textBoxShopName.Size = new System.Drawing.Size(252, 19);
             this.textBoxShopName.TabIndex = 3;
@@ -222,7 +234,7 @@
             // numericUpDownShopLevel
             // 
             this.numericUpDownShopLevel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDownShopLevel.Location = new System.Drawing.Point(66, 49);
+            this.numericUpDownShopLevel.Location = new System.Drawing.Point(121, 28);
             this.numericUpDownShopLevel.Maximum = new decimal(new int[] {
             99,
             0,
@@ -236,6 +248,7 @@
             this.numericUpDownShopLevel.Name = "numericUpDownShopLevel";
             this.numericUpDownShopLevel.Size = new System.Drawing.Size(120, 19);
             this.numericUpDownShopLevel.TabIndex = 4;
+            this.numericUpDownShopLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDownShopLevel.Value = new decimal(new int[] {
             1,
             0,
@@ -248,12 +261,12 @@
             this.groupBox1.Controls.Add(this.dataGridViewItems);
             this.groupBox1.Controls.Add(this.flowLayoutPanel2);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(200, 103);
+            this.groupBox1.Location = new System.Drawing.Point(200, 124);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(734, 347);
+            this.groupBox1.Size = new System.Drawing.Size(734, 326);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "入荷予定品リスト";
+            this.groupBox1.Text = "ItemList";
             // 
             // dataGridViewItems
             // 
@@ -266,7 +279,7 @@
             this.dataGridViewItems.RowHeadersVisible = false;
             this.dataGridViewItems.RowTemplate.Height = 21;
             this.dataGridViewItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewItems.Size = new System.Drawing.Size(728, 300);
+            this.dataGridViewItems.Size = new System.Drawing.Size(728, 279);
             this.dataGridViewItems.TabIndex = 4;
             this.dataGridViewItems.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnDataGridViewCellValueChanged);
             // 
@@ -289,6 +302,74 @@
             this.buttonAddItem.Text = "Add";
             this.buttonAddItem.UseVisualStyleBackColor = true;
             this.buttonAddItem.Click += new System.EventHandler(this.OnButtonAddItemClick);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(112, 12);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Buying Price Rate(%)";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(111, 12);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Selling Price Rate(%)";
+            // 
+            // numericUpDownBuyingPriceRate
+            // 
+            this.numericUpDownBuyingPriceRate.Location = new System.Drawing.Point(121, 53);
+            this.numericUpDownBuyingPriceRate.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDownBuyingPriceRate.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownBuyingPriceRate.Name = "numericUpDownBuyingPriceRate";
+            this.numericUpDownBuyingPriceRate.Size = new System.Drawing.Size(120, 19);
+            this.numericUpDownBuyingPriceRate.TabIndex = 7;
+            this.numericUpDownBuyingPriceRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDownBuyingPriceRate.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownBuyingPriceRate.ValueChanged += new System.EventHandler(this.OnNumericUpDownPriceRateChanged);
+            // 
+            // numericUpDownSellingPriceRate
+            // 
+            this.numericUpDownSellingPriceRate.Location = new System.Drawing.Point(121, 78);
+            this.numericUpDownSellingPriceRate.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDownSellingPriceRate.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownSellingPriceRate.Name = "numericUpDownSellingPriceRate";
+            this.numericUpDownSellingPriceRate.Size = new System.Drawing.Size(120, 19);
+            this.numericUpDownSellingPriceRate.TabIndex = 8;
+            this.numericUpDownSellingPriceRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDownSellingPriceRate.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericUpDownSellingPriceRate.Click += new System.EventHandler(this.OnNumericUpDownPriceRateChanged);
             // 
             // FormMain
             // 
@@ -318,6 +399,8 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBuyingPriceRate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSellingPriceRate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,6 +428,10 @@
         private System.Windows.Forms.DataGridView dataGridViewItems;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button buttonAddItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDownBuyingPriceRate;
+        private System.Windows.Forms.NumericUpDown numericUpDownSellingPriceRate;
     }
 }
 
