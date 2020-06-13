@@ -34,6 +34,15 @@ namespace SEditor
         public int MinCount { get; set; } = 0;
 
         /// <summary>
+        /// 購入価格
+        /// </summary>
+        public int BuyingPrice { get; set; } = 0;
+        /// <summary>
+        /// 販売価格
+        /// </summary>
+        public int SellingPrice { get; set; } = 0;
+
+        /// <summary>
         /// 値を設定する。
         /// </summary>
         /// <param name="paramName">パラメータ名</param>
@@ -54,6 +63,12 @@ namespace SEditor
                 case "minCount":
                     MinCount = (int)((double)(value));
                     break;
+                case "buyingPrice":
+                    BuyingPrice = (int)((double)(value));
+                    break;
+                case "sellingPrice":
+                    SellingPrice = (int)((double)(value));
+                    break;
                 case "condition":
                     Condition = (string)(value);
                     break;
@@ -70,6 +85,8 @@ namespace SEditor
             job.Append("kind", Kind);
             job.Append("maxCount", MaxCount);
             job.Append("minCount", MinCount);
+            job.Append("buyingPrice", BuyingPrice);
+            job.Append("sellingPrice", SellingPrice);
             job.Append("condition", Condition);
 
             return job.ToString();

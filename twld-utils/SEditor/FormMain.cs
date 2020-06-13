@@ -82,6 +82,18 @@ namespace SEditor
             });
             dt.Columns.Add(new DataColumn()
             {
+                DataType = typeof(int),
+                ColumnName = "BuyingPrice",
+                AllowDBNull = false,
+            });
+            dt.Columns.Add(new DataColumn()
+            {
+                DataType = typeof(int),
+                ColumnName = "SellingPrice",
+                AllowDBNull = false,
+            });
+            dt.Columns.Add(new DataColumn()
+            {
                 DataType = typeof(string),
                 ColumnName = "Condition",
                 AllowDBNull = true
@@ -93,7 +105,11 @@ namespace SEditor
             dataGridViewItems.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridViewItems.Columns[2].Width = 48;
             dataGridViewItems.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewItems.Columns[3].Width = 360;
+            dataGridViewItems.Columns[3].Width = 48;
+            dataGridViewItems.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewItems.Columns[4].Width = 48;
+            dataGridViewItems.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewItems.Columns[5].Width = 360;
         }
 
         /// <summary>
@@ -420,13 +436,24 @@ namespace SEditor
             {
                 var itemEntry = shop.ItemList[i];
                 var row = dt.NewRow();
-                row[0] = GetDisplayItemName(itemEntry);
-                row[1] = itemEntry.MinCount;
-                row[2] = itemEntry.MaxCount;
-                row[3] = itemEntry.Condition;
+                SetRowData(row, itemEntry);
                 dt.Rows.Add(row);
             }
+        }
 
+        /// <summary>
+        /// 行データを構築する。
+        /// </summary>
+        /// <param name="row">行</param>
+        /// <param name="itemEntry">アイテムエントリ</param>
+        private void SetRowData(DataRow row, ItemEntry itemEntry)
+        {
+            row[0] = GetDisplayItemName(itemEntry);
+            row[1] = itemEntry.MinCount;
+            row[2] = itemEntry.MaxCount;
+            row[3] = itemEntry.BuyingPrice;
+            row[4] = itemEntry.SellingPrice;
+            row[5] = itemEntry.Condition;
         }
 
         /// <summary>
@@ -563,10 +590,7 @@ namespace SEditor
 
             DataTable dt = (DataTable)(dataGridViewItems.DataSource);
             var row = dt.NewRow();
-            row[0] = GetDisplayItemName(itemEntry);
-            row[1] = itemEntry.MinCount;
-            row[2] = itemEntry.MaxCount;
-            row[3] = itemEntry.Condition;
+            SetRowData(row, itemEntry);
             dt.Rows.Add(row);
         }
 
@@ -643,7 +667,27 @@ namespace SEditor
                         }
                         break;
                     case 3:
-                        entry.Condition = row.Field<string>(3) ?? string.Empty;
+                        if (DBNull.Value.Equals(row[3]))
+                        {
+                            row[3] = entry.BuyingPrice;
+                        }
+                        else
+                        {
+                            entry.BuyingPrice = (int)(row[3]);
+                        }
+                        break;
+                    case 4:
+                        if (DBNull.Value.Equals(row[4]))
+                        {
+                            row[4] = entry.SellingPrice;
+                        }
+                        else
+                        {
+                            entry.SellingPrice = (int)(row[4]);
+                        }
+                        break;
+                    case 5:
+                        entry.Condition = row.Field<string>(5) ?? string.Empty;
                         break;
                 }
             }
