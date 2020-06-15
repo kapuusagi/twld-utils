@@ -47,7 +47,7 @@ namespace PEditor
             var dlg = new FileOpenDialogInternal() as IFileOpenDialog;
             try
             {
-                dlg.SetOptions(FOS.FOS_PICKFOLDERS | FOS.FOS_FORCEFILESYSTEM);
+                dlg.SetOptions(FOS.PICKFOLDERS | FOS.FORCEFILESYSTEM);
 
                 IShellItem item;
                 if (!string.IsNullOrEmpty(this.Path))
@@ -79,7 +79,7 @@ namespace PEditor
 
                 dlg.GetResult(out item);
                 string outputPath;
-                item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, out outputPath);
+                item.GetDisplayName(SIGDN.FILESYSPATH, out outputPath);
                 this.Path = outputPath;
 
                 return System.Windows.Forms.DialogResult.OK;
@@ -145,14 +145,14 @@ namespace PEditor
 
         private enum SIGDN : uint // not fully defined
         {
-            SIGDN_FILESYSPATH = 0x80058000,
+            FILESYSPATH = 0x80058000,
         }
 
         [Flags]
         private enum FOS // not fully defined
         {
-            FOS_FORCEFILESYSTEM = 0x40,
-            FOS_PICKFOLDERS = 0x20,
+            FORCEFILESYSTEM = 0x40,
+            PICKFOLDERS = 0x20,
         }
 
         private class NativeMethods
