@@ -432,12 +432,15 @@ namespace SEditor
             DataShop shop = GetSelectedShop();
             DataTable dt = (DataTable)(dataGridViewItems.DataSource);
             dt.Rows.Clear();
-            for (int i = 0; i <  shop.ItemList.Count; i++)
+            if (shop != null)
             {
-                var itemEntry = shop.ItemList[i];
-                var row = dt.NewRow();
-                SetRowData(row, itemEntry);
-                dt.Rows.Add(row);
+                for (int i = 0; i < shop.ItemList.Count; i++)
+                {
+                    var itemEntry = shop.ItemList[i];
+                    var row = dt.NewRow();
+                    SetRowData(row, itemEntry);
+                    dt.Rows.Add(row);
+                }
             }
         }
 
@@ -627,6 +630,10 @@ namespace SEditor
         private void OnNumericUpDownShopLevelValueChanged(object sender, EventArgs e)
         {
             DataShop shop = GetSelectedShop();
+            if (shop == null)
+            {
+                return;
+            }
             int level = (int)(numericUpDownShopLevel.Value);
             shop.Level = Math.Max(1, Math.Min(99, level));
         }
@@ -641,6 +648,10 @@ namespace SEditor
             try
             {
                 DataShop shop = GetSelectedShop();
+                if (shop == null)
+                {
+                    return;
+                }
                 DataTable dt = (DataTable)(dataGridViewItems.DataSource);
                 ItemEntry entry = shop.ItemList[e.RowIndex];
                 DataRow row = dt.Rows[e.RowIndex];
