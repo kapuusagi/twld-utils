@@ -50,6 +50,10 @@ namespace MVUtils_tool
                 {
                     DumpItems(DataArmorListParser.Read(path));
                 }
+                else if (fileName.Equals("Enemies.json"))
+                {
+                    DumpItems(DataEnemyListParser.Read(path));
+                }
                 else if (path.EndsWith(".json"))
                 {
                     DumpGenericJsonData(path);

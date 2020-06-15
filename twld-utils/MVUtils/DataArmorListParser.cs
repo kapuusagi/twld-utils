@@ -67,7 +67,7 @@ namespace MVUtils
                 }
                 catch (Exception e)
                 {
-                    throw new Exception($"{nameof(DataWeaponListParser)}: {dictionary.GetType().Name}'s {key} = {data} :.{e.Message}");
+                    throw new Exception($"{nameof(DataArmorListParser)}: {dictionary.GetType().Name}'s {key} = {data} :.{e.Message}");
                 }
             }
 

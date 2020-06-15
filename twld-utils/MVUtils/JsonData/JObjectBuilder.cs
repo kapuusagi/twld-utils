@@ -162,21 +162,11 @@ namespace MVUtils.JsonData
         /// <param name="d">数値</param>
         public void Append(string paramName, double d)
         {
-            // 一応下4桁までは見ようか。
-            int left = (int)((d - (int)(d)) * 10000);
-            if (left == 0)
+            if (sb.Length > 0)
             {
-                // 下4桁までゼロ
-                Append(paramName, (int)(d));
-            } 
-            else
-            {
-                if (sb.Length > 0)
-                {
-                    sb.Append(',');
-                }
-                sb.Append('\"').Append(paramName).Append("\":").Append(d.ToString("0.0000"));
+                sb.Append(',');
             }
+            sb.Append('\"').Append(paramName).Append("\":").Append(d.ToString("0.####"));
         }
 
         /// <summary>
