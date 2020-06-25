@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace QEditor
 {
+    /// <summary>
+    /// Quests.jsonを読み出してリストとして取得するためのリーダー
+    /// </summary>
     internal static class DataQuestListReader
     {
+        /// <summary>
+        /// pathで指定されたファイルを読み込み、Quests.jsonデータを構築して返す。
+        /// </summary>
+        /// <param name="path">パス</param>
+        /// <returns>データ</returns>
         public static List<DataQuest> Read(string path)
         {
             DataReader reader = new DataReader()
@@ -19,6 +27,9 @@ namespace QEditor
             return (List<DataQuest>)(reader.Read(path));
         }
 
+        /// <summary>
+        /// クエストデータリストを構築するためのデータコンストラクタ
+        /// </summary>
         private class DataQuestConstructor : DataConstructorBase
         {
             /// <summary>

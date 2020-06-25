@@ -105,6 +105,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// フォームが閉じられた時に通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnFormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -117,6 +122,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// オープンメニューが選択された時に通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnMenuItemOpenClick(object sender, EventArgs e)
         {
             try
@@ -137,6 +147,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// 保存メニューがクリックされたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnMenuItemSaveClick(object sender, EventArgs e)
         {
             try
@@ -159,11 +174,20 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// 終了メニューが選択された時に通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnMenuItemExitClick(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// フォルダ選択ダイアログを取得する。
+        /// </summary>
+        /// <returns>フォルダ選択ダイアログ</returns>
         private FolderSelectDialog GetFolderSelectDialog()
         {
             if (folderSelectDialog == null)
@@ -333,6 +357,9 @@ namespace QEditor
             ModelToUI();
         }
 
+        /// <summary>
+        /// モデルをUIに反映させる。
+        /// </summary>
         private void ModelToUI()
         {
             DataTable dt = (DataTable)(dataGridViewQuests.DataSource);
@@ -347,6 +374,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// 編集対象のクエストが選択変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnDataGridViewQuestsSelectionChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -372,8 +404,8 @@ namespace QEditor
                 }
                 else if (quest.QuestType == 3)
                 {
-                    quest.Achieve[1] = Math.Min(1, Math.Max(9999, quest.Achieve[1]));
-                    numericUpDownSwitch.Value = quest.Achieve[1];
+                    quest.Achieve[0] = Math.Min(1, Math.Max(9999, quest.Achieve[0]));
+                    numericUpDownSwitch.Value = quest.Achieve[0];
                 }
             }
             else
@@ -412,12 +444,23 @@ namespace QEditor
             panelEdit.Enabled = (quest != null);
         }
 
+        /// <summary>
+        /// rowにrewardItemをを設定する。
+        /// </summary>
+        /// <param name="row">行</param>
+        /// <param name="rewardItem">RewardItemオブジェクト</param>
         private void SetRewardItemRow(DataRow row, RewardItem rewardItem)
         {
             row[0] = GetItemName(rewardItem.Kind, rewardItem.DataId);
             row[1] = rewardItem.Value;
         }
 
+        /// <summary>
+        /// アイテム名を得る。
+        /// </summary>
+        /// <param name="kind">種類</param>
+        /// <param name="id">ID番号</param>
+        /// <returns></returns>
         private string GetItemName(int kind, int id)
         {
             if ((kind == 1) && (id > 0) && (id < items.Count))
@@ -437,6 +480,10 @@ namespace QEditor
             return $"type{kind}:{id}";
         }
 
+        /// <summary>
+        /// 現在編集中のクエストデータを取得する。
+        /// </summary>
+        /// <returns>クエストデータ</returns>
         private DataQuest GetCurrentQuest()
         {
             var rows = dataGridViewQuests.SelectedRows;
@@ -455,6 +502,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// 名前テキストボックスの内容が変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnTextBoxNameTextChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -485,6 +537,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// 委託条件テキストボックスの内容が変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnTextBoxEntrustConditionTextChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -494,6 +551,13 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// クエストタイプのラジオボタン選択状態が変更されたときに通知を受け取る。
+        /// 本メソッドはradioButtonQtSubjugation/radioButtonQtCollection/radioButtonQtEventの
+        /// イベントを一括で処理する。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnRadioButtonQtCheckedChanged(object sender, EventArgs e)
         {
             RadioButton rb = (RadioButton)(sender);
@@ -525,6 +589,11 @@ namespace QEditor
             flowLayoutPanelQtEvent.Enabled = radioButtonQtEvent.Checked;
         }
 
+        /// <summary>
+        /// エネミーコンボボックスの選択が変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnComboBoxEnemySelectedIndexChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -534,6 +603,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// エネミー数入力欄の数値が変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnNumericUpDownEnemyCountValueChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -543,6 +617,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// アイテム選択コンボボックスの選択内容が変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnComboBoxItemSelectedItemChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -552,6 +631,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// アイテム数入力欄の選択内容が変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnNumericUpDownItemCountValueChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -561,6 +645,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// スイッチ番号入力欄の値が変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnNumericUpDownSwitchValueChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -570,6 +659,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// 詳細情報入力欄のテキストが変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnTextBoxDescriptionTextChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -579,6 +673,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// 報酬テキスト欄の内容が変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnTextBoxRewardMsgTextChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -588,6 +687,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// ギルド経験値欄の入力値が変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnNumericUpDownGuildExpValueChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -664,10 +768,10 @@ namespace QEditor
         }
 
         /// <summary>
-        /// 
+        /// アイテムの種類を得る。
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
+        /// <param name="item">アイテム</param>
+        /// <returns>種類</returns>
         private int GetItemKind(IItem item)
         {
             if (item is DataItem)
@@ -688,6 +792,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// 達成条件テキスト欄の内容が変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnTextBoxAchieveMsgTextChanged(object sender, EventArgs e)
         {
             DataQuest quest = GetCurrentQuest();
@@ -697,6 +806,11 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// 報酬グリッドビューのセルが変更されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
         private void OnDataGridViewRewardItemsCellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             DataQuest quest = GetCurrentQuest();

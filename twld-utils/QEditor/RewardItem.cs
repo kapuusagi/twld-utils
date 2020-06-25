@@ -6,12 +6,29 @@ using System.Threading.Tasks;
 
 namespace QEditor
 {
+    /// <summary>
+    /// 報酬アイテムデータを表すモデル。
+    /// </summary>
     internal class RewardItem
     {
+        /// <summary>
+        /// 種類
+        /// </summary>
         public int Kind { get; set; } = 0;
+        /// <summary>
+        /// データID
+        /// </summary>
         public int DataId { get; set; } = 0;
+        /// <summary>
+        /// 数量
+        /// </summary>
         public int Value { get; set; } = 0;
 
+        /// <summary>
+        /// 値を設定する。
+        /// </summary>
+        /// <param name="paramName">パラメータ名</param>
+        /// <param name="value">値</param>
         public void SetValue(string paramName, object value)
         {
             switch (paramName)
@@ -28,6 +45,10 @@ namespace QEditor
             }
         }
 
+        /// <summary>
+        /// このオブジェクトの文字列表現を得る。
+        /// </summary>
+        /// <returns>文字列表現</returns>
         public override string ToString()
         {
             MVUtils.JsonData.JObjectBuilder job = new MVUtils.JsonData.JObjectBuilder();
