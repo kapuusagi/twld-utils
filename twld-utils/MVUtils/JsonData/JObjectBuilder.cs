@@ -228,6 +228,9 @@ namespace MVUtils.JsonData
                         case '\t':
                             sb.Append("\\t");
                             break;
+                        case '\\':
+                            sb.Append("\\\\");
+                            break;
                         default:
                             sb.Append(c);
                             break;
