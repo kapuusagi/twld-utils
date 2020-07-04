@@ -330,6 +330,10 @@ namespace MVUtils.JsonData
                             reader.Consume();
                             sb.Append('\t');
                             break;
+                        case '\\': // エスケープコード
+                            reader.Consume();
+                            sb.Append('\\');
+                            break;
                         default:
                             sb.Append(c);
                             break;
