@@ -132,7 +132,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(611, 397);
-            this.tabControl.TabIndex = 2;
+            this.tabControl.TabIndex = 3;
             // 
             // flowLayoutPanel1
             // 
@@ -143,7 +143,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(189, 24);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(611, 29);
-            this.flowLayoutPanel1.TabIndex = 3;
+            this.flowLayoutPanel1.TabIndex = 2;
             // 
             // buttonAddProfile
             // 

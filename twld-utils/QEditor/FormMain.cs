@@ -404,7 +404,7 @@ namespace QEditor
                 }
                 else if (quest.QuestType == 3)
                 {
-                    quest.Achieve[0] = Math.Min(1, Math.Max(9999, quest.Achieve[0]));
+                    quest.Achieve[0] = Math.Max(1, Math.Min(9999, quest.Achieve[0]));
                     numericUpDownSwitch.Value = quest.Achieve[0];
                 }
             }
@@ -419,9 +419,9 @@ namespace QEditor
             textBoxRewardMsg.Text = quest?.RewardsMessage ?? string.Empty;
             if (quest != null)
             {
-                quest.GuildExp = Math.Min(1, Math.Max(10000, quest.GuildExp));
+                quest.GuildExp = Math.Max(1, Math.Min(10000, quest.GuildExp));
                 numericUpDownGuildExp.Value = quest.GuildExp;
-                quest.RewardGold = Math.Min(0, Math.Max(1000000, quest?.RewardGold ?? 0));
+                quest.RewardGold = Math.Max(0, Math.Min(1000000, quest?.RewardGold ?? 0));
                 numericUpDownRewardGold.Value = quest.RewardGold;
             }
             else
@@ -460,7 +460,7 @@ namespace QEditor
         /// </summary>
         /// <param name="kind">種類</param>
         /// <param name="id">ID番号</param>
-        /// <returns></returns>
+        /// <returns>報酬アイテム名</returns>
         private string GetItemName(int kind, int id)
         {
             if ((kind == 1) && (id > 0) && (id < items.Count))
@@ -844,6 +844,157 @@ namespace QEditor
             }
             
 
+        }
+
+        /// <summary>
+        /// 報酬画面で行が削除されたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
+        private void OnDataGridViewRewardItemsRowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            DataQuest quest = GetCurrentQuest();
+            if (quest == null)
+            {
+                return;
+            }
+
+            int index = e.RowIndex;
+            for (int count = 0; count < e.RowCount; count++)
+            {
+                if (index < quest.RewardItems.Count)
+                {
+                    quest.RewardItems.RemoveAt(index);
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// 詳細生成ボタンがクリックされたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
+        private void OnButtonGenerateDescriptionClick(object sender, EventArgs e)
+        {
+            if (radioButtonQtSubjugation.Checked)
+            {
+                string name = comboBoxEnemy.SelectedItem.ToString() ?? "";
+                textBoxDescription.Text = $"{name}を討伐してください。";
+            }
+            else if (radioButtonQtCollection.Checked)
+            {
+                string name = comboBoxItem.SelectedItem.ToString() ?? "";
+                textBoxDescription.Text = $"{name}を集めてきてください。";
+            }
+            else
+            {
+                // 指定不可。
+            }
+        }
+
+        /// <summary>
+        /// 名前生成ボタンがクリックされたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
+        private void OnButtonGenerateNameClick(object sender, EventArgs e)
+        {
+            if (radioButtonQtSubjugation.Checked)
+            {
+                string name = comboBoxEnemy.SelectedItem.ToString() ?? "";
+                textBoxName.Text = $"{name}の討伐";
+            }
+            else if (radioButtonQtCollection.Checked)
+            {
+                string name = comboBoxItem.SelectedItem.ToString() ?? "";
+                textBoxName.Text = $"{name}の採取";
+            }
+            else
+            {
+                // 指定不可。
+            }
+        }
+
+        /// <summary>
+        /// 達成条件メッセージ生成ボタンがクリックされたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
+        private void OnButtonGenerateAchieveMessageClick(object sender, EventArgs e)
+        {
+            if (radioButtonQtSubjugation.Checked)
+            {
+                string name = comboBoxEnemy.SelectedItem.ToString() ?? "";
+                int enemyCount = (int)(numericUpDownEnemyCount.Value);
+                textBoxAchieveMsg.Text = $"{name}を{enemyCount}体討伐する。";
+            }
+            else if (radioButtonQtCollection.Checked)
+            {
+                string name = comboBoxItem.SelectedItem.ToString() ?? "";
+                int itemCount = (int)(numericUpDownItemCount.Value);
+                textBoxAchieveMsg.Text = $"{name}を{itemCount}個集める。";
+            }
+            else
+            {
+                // 指定不可。
+            }
+        }
+
+        /// <summary>
+        /// 報酬メッセージ生成ボタンがクリックされたときに通知を受け取る。
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントオブジェクト</param>
+        private void OnButtonGenerateRewardMessage(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            DataQuest quest = GetCurrentQuest();
+            if (quest == null)
+            {
+                return;
+            }
+
+            if (quest.RewardGold > 0)
+            {
+                sb.Append(quest.RewardGold).Append("\\G");
+            }
+            foreach (RewardItem rewardItem in quest.RewardItems)
+            {
+                string itemName = GetRewardItemName(rewardItem);
+                int itemCount = rewardItem.Value;
+                if (sb.Length > 0)
+                {
+                    sb.Append("\r\n");
+                }
+                sb.Append(itemName).Append('×').Append(itemCount);
+            }
+            textBoxRewardMsg.Text = (sb.Length > 0) ? sb.ToString() : "なし";
+        }
+
+        /// <summary>
+        /// アイテム名を得る。
+        /// </summary>
+        /// <param name="rewardItem">報酬アイテムエントリ</param>
+        /// <returns>報酬アイテム名</returns>
+        private string GetRewardItemName(RewardItem rewardItem)
+        {
+            int kind = rewardItem.Kind;
+            int id = rewardItem.DataId;
+            if ((kind == 1) && (id > 0) && (id < items.Count))
+            {
+                return items[id].Name;
+            }
+            else if ((kind == 2) && (id > 0) && (id < weapons.Count))
+            {
+                return weapons[id].Name;
+            }
+            else if ((kind == 3) && (id > 0) && (id < armors.Count))
+            {
+                return armors[id].Name;
+            }
+
+            return null;
         }
     }
 }
