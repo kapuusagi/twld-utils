@@ -51,13 +51,30 @@ if (!Imported.TWLD_UI) {
 
 // for ESLint
 if (typeof Window_ItemCategory === 'undefined') {
+    var Window_Selectable = {};
+    var Window_Gold = {};
+    var Window_ShopNumber = {};
+    var Window_ShopSell = {};
+    var SoundManager = {};
+    var ImageManager = {};
+    var Window_Help = {};
     var Game_Interpreter = {};
     var Scene_MenuBase = {};
 
     var SceneManager = {};
     var DataManager = {};
+    var TextManager = {};
 
     var $gameParty = {};
+    var $dataItems = {};
+    var $dataWeapons = {};
+    var $dataArmors = {};
+
+    var Graphics = {};
+    var Sprite = {};
+
+    var Window_CommandGeneric = {};
+    var GenericCommand = {};
 }
 
 var $dataShops = null;
@@ -669,7 +686,7 @@ var $gameShops = null;
     Scene_TwldShop.prototype.prepare = function(id, mode, clerkFileName) {
         this._shop = $gameShops.getShop(id); // Game_Shopオブジェクト
         this._mode = mode;
-        this._clerkFileName = clerkFileName;
+        this._clerkFileName = clerkFileName || '';
     };
 
     /**
@@ -684,6 +701,7 @@ var $gameShops = null;
         this.createSellWindow();
         this.createCategoryWindow();
         this.createNumberWindow();
+        this.loadClerkPicture();
     };
 
     /**
@@ -750,6 +768,7 @@ var $gameShops = null;
         this._sellWindow.hide();
         this._sellWindow.setHandler('ok', this.onSellOk.bind(this));
         this._sellWindow.setHandler('cancel', this.onSellCancel.bind(this));
+        this._sellWindow.setHandler('itemchange', this.onSellItemChange.bind(this));
         this.addWindow(this._sellWindow);
     };
 
@@ -791,6 +810,34 @@ var $gameShops = null;
         this.addWindow(this._numberWindow);
     };
 
+    /**
+     * 店員のイメージを作成する。
+     */
+    Scene_TwldShop.prototype.loadClerkPicture = function() {
+        if (this._clerkFileName) {
+            this._clerkBitmap = ImageManager.loadPicture(this._clerkFileName, 0);
+            if (!this._clerkBitmap.isReady()) {
+                // デカいファイルだと読み出しがすぐに完了しない？
+                // それともupdate()で進まないとキャッシュされない？
+                // いずれにせよ初回読み出しが上手くいかない奴らがいる。
+                this._clerkBitmap.addLoadListener(this.addClerkSprite.bind(this));
+            } else {
+                this.addClerkSprite();
+            }
+        }
+    }
+
+    /**
+     * 店員画像を追加する。
+     */
+    Scene_TwldShop.prototype.addClerkSprite = function() {
+        console.log('clerk bitmap loaded.');
+        this._clerkSprite = new Sprite();
+        this._clerkSprite.bitmap = this._clerkBitmap;
+        this._clerkSprite.x = Graphics.boxWidth - this._clerkBitmap.width;
+        this._clerkSprite.y = Graphics.boxHeight - this._clerkBitmap.height;
+        this._backgroundSprite.addChild(this._clerkSprite);
+    };
     /**
      * 購入操作が可能かどうかを判定する。
      * @return {Boolean} 購入操作ができる場合にはtrue, できない場合にはfalse
@@ -911,6 +958,7 @@ var $gameShops = null;
         switch (this._commandWindow.currentSymbol()) {
             case 'buy':
                 this._commandWindow.deactivate();
+                this._helpWindow.setItem(this._buyWindow.item());
                 this._buyWindow.setMoney(this.money());
                 this._buyWindow.refresh();
                 this._buyWindow.show();
@@ -951,6 +999,7 @@ var $gameShops = null;
      * 購入品選択ウィンドウでキャンセル操作されたときの処理を行う。
      */
     Scene_TwldShop.prototype.onBuyCancel = function() {
+        this._helpWindow.clear();
         this._buyWindow.deactivate();
         this._buyWindow.hide();
         this._commandWindow.activate();
@@ -961,7 +1010,7 @@ var $gameShops = null;
      * 購入品選択ウィンドウで項目の選択が変更されたときの処理を行う。
      */
     Scene_TwldShop.prototype.onBuyItemChange = function() {
-        //this._helpWindow.setItem(this._buyWindow.item());
+        this._helpWindow.setItem(this._buyWindow.item());
     };
 
     /**
@@ -972,6 +1021,7 @@ var $gameShops = null;
         // 販売品選択ウィンドウをアクティブ化
         this._categoryWindow.deactivate();
         this._sellWindow.select(0);
+        this._helpWindow.setItem(this._sellWindow.item());
         this._sellWindow.activate();
     };
 
@@ -1011,9 +1061,17 @@ var $gameShops = null;
      */
     Scene_TwldShop.prototype.onSellCancel = function() {
         // カテゴリウィンドウを表示してアクティブ化
+        this._helpWindow.clear();
         this._categoryWindow.show();
         this._sellWindow.deactivate();
         this._categoryWindow.activate();
+    };
+
+    /**
+     * 売却画面で選択項目が変更されたときの処理を行う。
+     */
+    Scene_TwldShop.prototype.onSellItemChange = function() {
+        this._helpWindow.setItem(this._sellWindow.item());
     };
 
     /**
@@ -1075,10 +1133,12 @@ var $gameShops = null;
         switch (this._commandWindow.currentSymbol()) {
             case 'buy':
                 this._buyWindow.refresh();
+                this._helpWindow.setItme(this._buyWindow.item());
                 this._buyWindow.activate();
                 break;
             case 'sell':
                 this._sellWindow.refresh();
+                this._helpWindow.setItem(this._sellWindow.item());
                 this._sellWindow.activate();
                 break;
         }
@@ -1098,7 +1158,6 @@ var $gameShops = null;
                 break;
         }
     };
-
 
 
     //------------------------------------------------------------------------------
